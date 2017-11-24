@@ -4,6 +4,7 @@ const path = require('path');
 const mime = require('mime-types');
 
 http.createServer((request, response) => {
+    console.log(request.url);
     let url = request.url.replace(/(\?.*)|(\/\.\.)/, ""),
         cwd = process.cwd(),
         body = "OK",
