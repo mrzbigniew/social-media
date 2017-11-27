@@ -13,14 +13,22 @@
 <body ng-app="app">
     <div class="container" ng-controller="PostsCtrl as $ctrl">
         <h1 class="head">Newest posts</h1>
-        <form role="form" name="add_post_form">
+        <form role="form" name="add_post_form" novalidate>
             <div class="form-group">
                 <div class="input-group">
-                    <input type="text" name="post_body" ng-model="post.body" class="form-control" />
+                    <input type="text" 
+                           name="post_body" 
+                           ng-model="post.body" 
+                           class="form-control" 
+                           required
+                    />                    
                     <span class="input-group-btn">
-                        <button ng-click="$ctrl.savePost()" class="btn btn-default">Send post</button>
+                        <button ng-disabled="add_post_form.post_body.$error.required" ng-click="$ctrl.savePost()" class="btn btn-default">Send post</button>
                         <button ng-click="$ctrl.abort()" class="btn btn-danger">Abort</button>
                     </span>
+                </div>
+                <div ng-show="add_post_form.post_body.$error.required">
+                    Post body cant be empty
                 </div>
             </div>
             <div ng-show="message.text" class="alert alert-{{message.type}}" ng-click="$ctrl.hideMessage()">
@@ -103,7 +111,7 @@
 
                         self.updatePost = function () {
                             $http.put(
-                                'http://localhost:3000/api/posts',
+                                'http://localhost:3000/api/posts/' + $scope.post._id,
                                 $scope.post,
                                 {
                                     headers: {
@@ -124,20 +132,16 @@
                         self.savePost = function () {
                             if ($scope.post._id) {
                                 self.updatePost();
-                            } else {
+                            } else if($scope.post.body) {
                                 self.newPost();
+                            } else{
+
                             }
                         };
 
                         self.deletePost = function (index) {
                             $http.delete(
-                                "http://localhost:3000/api/posts",
-                                {
-                                    _id: $scope.posts[index]._id
-                                },
-                                {
-                                    'Content-Type': 'application/json'
-                                }
+                                'http://localhost:3000/api/posts/' + $scope.posts[index]._id
                             ).then(
                                 function (res) {
                                     self.loadPosts();
