@@ -13,6 +13,11 @@
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
     "mime-type": "^3.0.5",
-    "mime-types": "^2.1.17"
+    "mime-types": "^2.1.17",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }
