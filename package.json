@@ -16,6 +16,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-copy": "^1.0.1",
     "gulp-less": "^3.3.2",
+    "gulp-minify": "^2.1.0",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
@@ -25,7 +26,9 @@
     "gulp-watch": "^4.3.11",
     "mime-type": "^3.0.5",
     "mime-types": "^2.1.17",
-    "mongoose": "^4.13.4"
+    "mongoose": "^4.13.4",
+    "pump": "^1.0.3",
+    "uglify-js": "^3.2.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
