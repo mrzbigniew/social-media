@@ -11,13 +11,24 @@
   "dependencies": {
     "angular": "^1.5.11",
     "bootstrap": "^3.3.7",
+    "express": "^4.16.2",
     "font-awesome": "^4.7.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-copy": "^1.0.1",
+    "gulp-less": "^3.3.2",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-stylus": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-watch": "^4.3.11",
     "mime-type": "^3.0.5",
     "mime-types": "^2.1.17",
-    "express": "^4.16.2",
     "mongoose": "^4.13.4"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
     "nodemon": "^1.12.1"
   }
 }
