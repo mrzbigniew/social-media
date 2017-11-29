@@ -7,7 +7,7 @@ const path = require('path');
 router.use(express.static(path.normalize(__dirname + '/../../../dist/')));
 
 router.get('/', function(req,res){
-    res.sendFile(path.normalize(__dirname + '/../../../dist/layouts/posts.html'));
+    res.sendFile(path.normalize(__dirname + '/../../../dist/layouts/app.html'));
 });
 
 module.exports = router;

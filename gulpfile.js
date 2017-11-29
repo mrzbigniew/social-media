@@ -1,62 +1,18 @@
+'use strict'
+
 const gulp = require('gulp');
-const concat = require('gulp-concat');
-const minify = require('gulp-minify');
-const rename = require('gulp-rename');
-const copy = require('gulp-copy');
-const ngAnnotate = require('gulp-ng-annotate')
-const sourceMaps = require('gulp-sourcemaps');
+const fs = require('fs');
 
-const stylus = require('gulp-stylus');
-const sass = require('gulp-sass');
-const less = require('gulp-less');
-
-gulp.task('js', function () {
-   gulp.src(
-        [
-            'src/app/app.js',
-            'src/app/**/*.js'
-        ]
-    )
-        .pipe(sourceMaps.init())
-        .pipe(concat('app.js'))
-        .pipe(minify())
-        .pipe(sourceMaps.write('./',{
-            includeContent: true,
-            sourceRoot: '/src/app'
-        }))
-        .pipe(gulp.dest('dist'))
+fs.readdirSync(__dirname + '/gulp').forEach(function (task) {
+    require('./gulp/' + task);
 });
 
-gulp.task('html', function () {
-    gulp.src(['src/app/**/*.html'])
-        .pipe(gulp.dest('dist/'))
+gulp.task('watch:all',['html', 'js', 'css'],function(){
+    gulp.watch('./src/app/**/*.*',{
+        interval : 200,
+        persistent: true,
+        ignoreInitial: true,
+    },['html', 'js', 'css']);
 });
 
-gulp.task('stylus', function () {
-    gulp.src(['src/app/**/*.styl'])
-        .pipe(stylus())
-        .pipe(gulp.dest('dist'));
-});
-
-gulp.task('sass', function () {
-    gulp.src(['src/app/**/*.sass'])
-        .pipe(sass())
-        .pipe(gulp.dest('dist'));
-});
-
-gulp.task('less', function () {
-    gulp.src(['src/app/**/*.less'])
-        .pipe(sass())
-        .pipe(gulp.dest('dist'));
-});
-
-gulp.task('compile', ['html', 'js', 'stylus', 'sass', 'less']);
-
-gulp.task('watch', ['compile'], function () {
-    const watch = gulp.watch("./src/app/**/*", ['compile']);
-    watch.on('change', function (ev) {
-        console.log('File ' + ev.path + ' was ' + ev.type + ', running task...');
-    });
-});
-
-
+gulp.task('dev', ['watch:all','dev:server']);
