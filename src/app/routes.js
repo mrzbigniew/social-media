@@ -10,6 +10,9 @@
                         controller: 'PostsCtrl',
                         templateUrl: 'layouts/posts.html'
                     })
+                    .when('/posts',{
+                        redirectTo: '/'
+                    })
                     .when('/register', {
                         controller: 'RegisterCtrl',
                         templateUrl: 'layouts/register.html'
