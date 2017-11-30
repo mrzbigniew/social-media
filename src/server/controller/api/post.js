@@ -2,6 +2,7 @@
 
 const Post = require('../../models/post');
 const router = require('express').Router();
+const websocket = require('../../websocket');
 
 router.get('/', function (req, res, next) {
     Post.find(function (err, posts) {
@@ -14,7 +15,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
     const post = new Post({
-        username: req.body.username,
+        username: req.auth.username,
         body: req.body.body
     });
 
@@ -22,15 +23,17 @@ router.post('/', function (req, res, next) {
         if (err) {
             return next(err);
         }
+        websocket.broadcast('new_post',post);
         res.status(201).json(post);
     });
 });
 
 router.delete('/:id', function (req, res, next) {
-    Post.findByIdAndRemove(req.params.id, function (err) {
+    Post.findByIdAndRemove(req.params.id, function (err, post) {
         if (err) {
             return next(err);
         }
+        websocket.broadcast('delete_post', post);
         res.status(204).end();
     });
 });
@@ -42,10 +45,11 @@ router.put('/:id', function (req, res, next) {
             username: req.body.username,
             body: req.body.body
         },
-        function (err) {
+        function (err, post) {
             if (err) {
                 return next(err);
             }
+            websocket.broadcast('update_post', post);
             res.status(204).end();
         }
     );

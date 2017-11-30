@@ -27,23 +27,34 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    const user = new User({
+    User.findOne({
         username: req.body.username
-    });
-
-    bcrypt.hash(req.body.password, 10, function (err,hash) {
+    }, function (err, userData) {
         if(err){
             return next(err);
         }
-        user.password = hash;
+        if(userData){
+            return res.status(409).json('User name already in use.');
+        }
+
+        const user = new User({
+            username: req.body.username
+        });
     
-        user.save(function(err){
-            if(err){
+        bcrypt.hash(req.body.password, 10, function (err, hash) {
+            if (err) {
                 return next(err);
             }
-            res.send(201);
+            user.password = hash;
+    
+            user.save(function (err) {
+                if (err) {
+                    return next(err);
+                }
+                res.send(201);
+            });
         });
-    });
+    });    
 });
 
 module.exports = router;

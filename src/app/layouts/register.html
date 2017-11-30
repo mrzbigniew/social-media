@@ -1,6 +1,6 @@
 <div class="container">
     <h1>Registration form</h1>
-    <form novalidate ng-submit="register(username,password)">
+    <form novalidate ng-submit="register(username,password)" name="registration_form">
         <div class="form-group">
             <label>Username</label>
             <input type="text" 
@@ -10,7 +10,7 @@
                    class="form-control"
              />
         </div>
-        <div class="form-grup">
+        <div class="form-group">
             <label>Password</label>
             <input type="password" 
                    name="password"
@@ -18,9 +18,13 @@
                    required
                    class="form-control"
             />
-        </div>
-        <div class="form-grup">
-            <input name="submit" type="submit" value="Register" class="btn btn-promary btn-lg" />
-        </div>
+        </div>        
+        <input name="submit" type="submit" value="Register" class="btn btn-success pull-right" />       
+        <div ng-if="error">
+            <div class="alert alert-warning">
+                {{error.message}}
+            </div>
+        </div>  
     </form>
+    
 </div>
