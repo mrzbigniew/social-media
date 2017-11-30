@@ -7,7 +7,6 @@ const clients = [];
 exports.connect = function (server) {
     const wss = new WebSocket.Server({ server: server });
     wss.on('connection', function (ws) {
-        console.log(ws);
         exports.broadcast('New user joined');
         clients.push(ws);
         ws.on('close', function () {

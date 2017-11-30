@@ -37,6 +37,10 @@
                     resolve();
                 });
             };
+
+            self.isLogged = function(){
+                return !!$window.localStorage.getItem('token');
+            };
         }
     ])
 }());

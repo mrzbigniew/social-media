@@ -2,17 +2,21 @@
     'use strict'
 
     angular.module('app').controller('PostsCtrl', [
-        '$scope', 'PostsSvc', 
-        function ($scope, PostsSvc) {
+        '$scope', 'PostsSvc', 'UserSvc',
+        function ($scope, PostsSvc, UserSvc) {
             const self = this;
             $scope.posts = [];
             $scope.post = {};
 
-            $scope.$on('ws:new_post', function(event,post){
-                $scope.$apply(function(){
+            $scope.$on('ws:new_post', function (event, post) {
+                $scope.$apply(function () {
                     $scope.posts.push(post);
                 });
             });
+
+            self.canAddPosts = function () {
+                return UserSvc.isLogged();
+            };
 
             self.loadPosts = function () {
                 $scope.post = {};

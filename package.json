@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "protractor": "^5.2.0"
   }
 }
