@@ -26,4 +26,3 @@ exports.broadcast = function (topic, data) {
         client.send(json);
     });
 };
-
