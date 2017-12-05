@@ -1,2 +1,3 @@
 ./src/test/server/**/*.spec.js
 --recursive
+--exit

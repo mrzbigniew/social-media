@@ -49,6 +49,12 @@ describe('controllers.api.posts', function () {
                 .end(done);
         });
 
+        afterEach(function(done){
+            user.remove({},function(err){
+                done(err);
+            });
+        });
+
         it('added new post', function (done) {
             Post.findOne(function (err, post) {
                 expect(post.body).to.equal('this is my first post');

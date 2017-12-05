@@ -23,3 +23,7 @@ exports.create = function (username, password, cb) {
         });
     });
 };
+
+exports.remove = function(data,cb){
+    User.remove(data,cb);
+};

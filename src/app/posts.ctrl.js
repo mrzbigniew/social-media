@@ -24,7 +24,7 @@
                     .success(function (posts) {
                         $scope.posts = posts;
                     });
-            }
+            };
 
             self.removePostFromList = function (post) {
                 const deletedPostIndex = $scope.posts.findIndex(function (currentPost) {
